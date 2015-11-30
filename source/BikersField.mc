@@ -36,11 +36,12 @@ class BikersView extends Ui.DataField {
     hidden var hrColor = Graphics.COLOR_RED;
     hidden var headerColor = Graphics.COLOR_DK_GRAY;
         
-    hidden var paceStr, avgPaceStr, hrStr, distanceStr, durationStr;
+    hidden var paceStr, avgPaceStr, hrStr, distanceStr, durationStr, cadStr;
     
     hidden var paceData = new DataQueue(10);
     hidden var avgSpeed= 0;
     hidden var hr = 0;
+    hidden var cad = 0;
     hidden var distance = 0;
     hidden var elapsedTime = 0;
     hidden var gpsSignal = 0;
@@ -62,6 +63,7 @@ class BikersView extends Ui.DataField {
         avgSpeed = info.averageSpeed != null ? info.averageSpeed : 0;
         elapsedTime = info.elapsedTime != null ? info.elapsedTime : 0;        
         hr = info.currentHeartRate != null ? info.currentHeartRate : 0;
+        cad = info.currentCadence != null ? info.currentCadence : 0;
         distance = info.elapsedDistance != null ? info.elapsedDistance : 0;
         gpsSignal = info.currentLocationAccuracy;
     }
@@ -94,6 +96,7 @@ class BikersView extends Ui.DataField {
         paceStr = Ui.loadResource(Rez.Strings.pace);
         avgPaceStr = Ui.loadResource(Rez.Strings.avgpace);
         hrStr = Ui.loadResource(Rez.Strings.hr);
+        cadStr = Ui.loadResource(Rez.Strings.cad);
         distanceStr = Ui.loadResource(Rez.Strings.distance);
         durationStr = Ui.loadResource(Rez.Strings.duration);
     }
@@ -131,9 +134,9 @@ class BikersView extends Ui.DataField {
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
         dc.drawText(50, 70, VALUE_FONT, getSpeed(computeAverageSpeed()), CENTER);
         
-        //hr
+        //hr //changed to cadence
         dc.setColor(hrColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(109, 70, VALUE_FONT, hr.format("%d"), CENTER);
+        dc.drawText(109, 70, VALUE_FONT, cad.format("%d"), CENTER);
         
         //apace
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
@@ -200,7 +203,7 @@ class BikersView extends Ui.DataField {
         dc.setColor(headerColor, Graphics.COLOR_TRANSPARENT);
         dc.drawText(50, 38, HEADER_FONT, paceStr, CENTER);
         dc.drawText(57, 165, HEADER_FONT, avgPaceStr, CENTER);
-        dc.drawText(109, 38, HEADER_FONT, hrStr, CENTER); 
+        dc.drawText(109, 38, HEADER_FONT, cadStr, CENTER); //hrStr, CENTER); 
         dc.drawText(170, 38, HEADER_FONT, distanceStr, CENTER);
         dc.drawText(158, 165, HEADER_FONT, durationStr, CENTER);
         

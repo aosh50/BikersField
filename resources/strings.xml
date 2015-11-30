@@ -3,6 +3,7 @@
     <string id="pace">SPEED</string>
     <string id="avgpace">AVG SPEED</string>
     <string id="hr">HR</string>
+    <string id="cad">CAD</string>
     <string id="distance">DIST</string>
     <string id="duration">DURATION</string>
 </resources>
